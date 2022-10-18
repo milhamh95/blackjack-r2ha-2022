@@ -9,6 +9,6 @@ public class CardDisplayTest {
         Card card = new Card(Suit.CLUBS, Rank.TEN);
 
         assertThat(card.display())
-                .isEqualTo("");
+                .isEqualTo("[30m┌─────────┐[1B[11D│10       │[1B[11D│         │[1B[11D│    ♣    │[1B[11D│         │[1B[11D│       10│[1B[11D└─────────┘");
     }
 }
