@@ -17,6 +17,6 @@ public class CardDisplayTest {
         Card card = new Card(Suit.SPADES, Rank.SEVEN);
 
         assertThat(card.display())
-                .isEqualTo("");
+                .isEqualTo("[30m┌─────────┐[1B[11D│7        │[1B[11D│         │[1B[11D│    ♠    │[1B[11D│         │[1B[11D│        7│[1B[11D└─────────┘");
     }
 }
