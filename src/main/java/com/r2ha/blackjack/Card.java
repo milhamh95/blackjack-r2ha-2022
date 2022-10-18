@@ -35,7 +35,12 @@ public class Card {
                                     .toString(), lines);
     }
 
-    private Rank rank() {
+    // set to public because in the definition
+    // it's using final.
+    // couldn't be modified. no method to changes
+    // in ddd, it's called value object
+    // Note: be careful not exposing details to the caller
+    public Rank rank() {
         return rank;
     }
 
