@@ -1,4 +1,8 @@
-package com.r2ha.blackjack;
+package com.r2ha.blackjack.domain;
+
+import com.r2ha.blackjack.domain.Card;
+import com.r2ha.blackjack.domain.Rank;
+import com.r2ha.blackjack.domain.Suit;
 
 import java.util.ArrayList;
 import java.util.Collections;
