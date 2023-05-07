@@ -62,6 +62,10 @@ public class Game {
         deck = new Deck();
     }
 
+    public static void directOutputTo(PrintStream printStream) {
+        consoleOut = printStream;
+    }
+
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
