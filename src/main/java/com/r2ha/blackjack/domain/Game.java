@@ -4,12 +4,14 @@ import com.r2ha.blackjack.adapter.in.console.ConsoleHand;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class Game {
 
+    private static PrintStream consoleOut = System.out;
     private final Deck deck;
 
     private final Hand dealerHand = new Hand();
@@ -24,20 +26,8 @@ public class Game {
         resetScreen();
     }
 
-    private static void println(Object toPrint) {
-        System.out.println(toPrint);
-    }
-
-    private static void print(Object toPrint) {
-        System.out.print(toPrint);
-    }
-
-    private void println() {
-        System.out.println();
-    }
-
     private static void resetScreen() {
-        println(ansi().reset());
+        consoleOut.println(ansi().reset());
     }
 
     private static void playGame() {
@@ -47,7 +37,7 @@ public class Game {
     }
 
     private static void waitForEnterFromUser() {
-        println(ansi()
+        consoleOut.println(ansi()
                                    .cursor(3, 1)
                                    .fgBrightBlack().a("Hit [ENTER] to start..."));
 
@@ -57,7 +47,7 @@ public class Game {
 
     private static void displayWelcomeScreen() {
         AnsiConsole.systemInstall();
-        println(ansi()
+        consoleOut.println(ansi()
                                    .bgBright(Ansi.Color.WHITE)
                                    .eraseScreen()
                                    .cursor(1, 1)
@@ -93,15 +83,15 @@ public class Game {
 
     private void determineOutcome() {
         if (playerHand.isBusted()) {
-            println("You Busted, so you lose.  💸");
+            consoleOut.println("You Busted, so you lose.  💸");
         } else if (dealerHand.isBusted()) {
-            println("Dealer went BUST, Player wins! Yay for you!! 💵");
+            consoleOut.println("Dealer went BUST, Player wins! Yay for you!! 💵");
         } else if (playerHand.beats(dealerHand)) {
-            println("You beat the Dealer! 💵");
+            consoleOut.println("You beat the Dealer! 💵");
         } else if (playerHand.pushes(dealerHand)) {
-            println("Push: Nobody wins, we'll call it even.");
+            consoleOut.println("Push: Nobody wins, we'll call it even.");
         } else {
-            println("You lost to the Dealer. 💸");
+            consoleOut.println("You lost to the Dealer. 💸");
         }
     }
 
@@ -129,33 +119,33 @@ public class Game {
                     return;
                 }
             } else {
-                println("You need to [H]it or [S]tand");
+                consoleOut.println("You need to [H]it or [S]tand");
             }
         }
     }
 
     private String inputFromPlayer() {
-        println("[H]it or [S]tand?");
+        consoleOut.println("[H]it or [S]tand?");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
     private void displayGameState() {
-        print(ansi().eraseScreen().cursor(1, 1));
-        println("Dealer has: ");
-        println(ConsoleHand.displayFaceUpCard(dealerHand));
+        consoleOut.print(ansi().eraseScreen().cursor(1, 1));
+        consoleOut.println("Dealer has: ");
+        consoleOut.println(ConsoleHand.displayFaceUpCard(dealerHand));
 
         // second card is the hole card, which is hidden, or "face down"
         displayBackOfCard();
 
-        println();
-        println("Player has: ");
-        println(ConsoleHand.cardsAsString(playerHand));
-        println(" (" + playerHand.value() + ")");
+        consoleOut.println();
+        consoleOut.println("Player has: ");
+        consoleOut.println(ConsoleHand.cardsAsString(playerHand));
+        consoleOut.println(" (" + playerHand.value() + ")");
     }
 
     private void displayBackOfCard() {
-        print(
+        consoleOut.print(
                 ansi()
                         .cursorUp(7)
                         .cursorRight(12)
@@ -169,15 +159,15 @@ public class Game {
     }
 
     private void displayFinalGameState() {
-        print(ansi().eraseScreen().cursor(1, 1));
-        println("Dealer has: ");
-        println(ConsoleHand.cardsAsString(dealerHand));
-        println(" (" + dealerHand.value() + ")");
+        consoleOut.print(ansi().eraseScreen().cursor(1, 1));
+        consoleOut.println("Dealer has: ");
+        consoleOut.println(ConsoleHand.cardsAsString(dealerHand));
+        consoleOut.println(" (" + dealerHand.value() + ")");
 
-        println();
-        println("Player has: ");
-        println(ConsoleHand.cardsAsString(playerHand));
-        println(" (" + playerHand.value() + ")");
+        consoleOut.println();
+        consoleOut.println("Player has: ");
+        consoleOut.println(ConsoleHand.cardsAsString(playerHand));
+        consoleOut.println(" (" + playerHand.value() + ")");
     }
 
 }
